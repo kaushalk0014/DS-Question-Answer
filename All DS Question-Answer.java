@@ -567,3 +567,25 @@ class Solution {
         }
     }
 }
+------------------------------------------------------------------------------------------------------------
+Single Among Doubles
+Examples :
+
+Input: n = 5, arr[] = {1, 1, 2, 5, 5}
+Output: 2
+Explanation: Since 2 occurs once, while other numbers occur twice, 2 is the answer.
+Input: n = 7, arr[] = {2, 2, 5, 5, 20, 30, 30}
+Output: 20
+Explanation: Since 20 occurs once, while other numbers occur twice, 20 is the answer.
+
+class Sol {
+    public static int search(int n, int arr[]) {
+        int num=0;
+        for(int i=0; i<n ; i++){
+            num= num ^ arr[i];
+        }
+        return num;
+    }
+}
+
+
