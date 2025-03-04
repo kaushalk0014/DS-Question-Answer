@@ -587,5 +587,100 @@ class Sol {
         return num;
     }
 }
+----------------------------------------------------------------------------------------------------------
+Array Subset
+Examples:
 
+Input: a[] = [11, 7, 1, 13, 21, 3, 7, 3], b[] = [11, 3, 7, 1, 7]
+Output: true
+Explanation: b[] is a subset of a[]
+ 
+Input: a[] = [10, 5, 2, 23, 19], b[] = [19, 5, 3]
+Output: false
+Explanation: b[] is not a subset of a[]
 
+class Solution {
+    public boolean isSubset(int a[], int b[]) {
+       Map<Integer, Integer> map=new HashMap<Integer, Integer>();
+       for(int num : a){
+           map.put(num, map.getOrDefault(num, 0)+1);
+       }
+       for(int num : b){
+           if(!map.containsKey(num) || map.get(num) ==0 ){
+              return false;
+           }else{
+               map.put(num, map.get(num)-1);
+           }
+       }
+       return true;
+    }
+}
+----------------------------------------------------------------------------------------------------------
+LeetCode 1. Two Sum
+
+Example 1:
+
+Input: nums = [2,7,11,15], target = 9
+Output: [0,1]
+Explanation: Because nums[0] + nums[1] == 9, we return [0, 1].
+Example 2:
+
+Input: nums = [3,2,4], target = 6
+Output: [1,2]
+Example 3:
+
+Input: nums = [3,3], target = 6
+Output: [0,1]
+
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        Map<Integer, Integer> map=new HashMap<Integer, Integer>();
+        for(int i=0;i <nums.length; i++){
+            int temp=target-nums[i];
+            if(map.containsKey(temp)){
+                return new int[]{map.get(temp),i};
+            }else{
+                map.put(nums[i], i);
+            }
+        }
+        return new int[]{};
+    }
+}
+------------------------------------------------------------------------------------------------------
+LeetCode 242. Valid Anagram
+
+Example 1:
+Input: s = "anagram", t = "nagaram"
+Output: true
+
+Example 2:
+Input: s = "rat", t = "car"
+Output: false
+
+class Solution {
+    public boolean isAnagram(String s, String t) {
+        if(s==null || t==null || s.length()!=t.length()){
+            return false;
+        }
+        Map<Character, Integer> map=new HashMap<>();
+        for(char ch: s.toCharArray()){
+           map.put(ch, map.getOrDefault(ch, 0) + 1);
+        }
+
+        for(char ch: t.toCharArray()){
+            if(map.containsKey(ch)){
+                if(map.get(ch)==1){
+                    map.remove(ch);
+                }else{
+                    map.put(ch, map.get(ch)-1);
+                }
+            }else{
+                return false;
+            }
+        }
+        if(map.size()>0){
+            return false;
+        }
+        return true;
+    }
+}
