@@ -684,3 +684,33 @@ class Solution {
         return true;
     }
 }
+-------------------------------------------------------------------------------------------------------------
+GFG Largest subarray with 0 sum
+Examples:
+
+Input: arr[] = [15, -2, 2, -8, 1, 7, 10, 23]
+Output: 5
+Explanation: The largest subarray with a sum of 0 is [-2, 2, -8, 1, 7].
+Input: arr[] = [2, 10, 4]
+Output: 0
+Explanation: There is no subarray with a sum of 0.
+
+class Solution {
+    int maxLen(int arr[]) {
+        Map<Integer, Integer> map= new HashMap<Integer, Integer>();
+        int sum=0;
+        int ans=0;
+        for(int i=0;i< arr.length; i++){
+            sum=sum+(arr[i]);
+            if(map.containsKey(sum)){
+                ans = Math.max(ans,i-map.get(sum));
+            }else{
+                map.put(sum,i);
+            }
+            if(map.size()>0 && sum==0){
+                ans= Math.max(ans,i+1);
+            }
+        }
+        return ans;
+    }
+}
