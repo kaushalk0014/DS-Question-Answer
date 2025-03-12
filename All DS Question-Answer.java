@@ -880,3 +880,100 @@ class Solution {
         return -1;
     }
 }
+--------------------------------------------------------------------------
+LeetCode 153. Find Minimum in Rotated Sorted Array
+
+Example 1:
+
+Input: nums = [3,4,5,1,2]
+Output: 1
+Explanation: The original array was [1,2,3,4,5] rotated 3 times.
+Example 2:
+
+Input: nums = [4,5,6,7,0,1,2]
+Output: 0
+Explanation: The original array was [0,1,2,4,5,6,7] and it was rotated 4 times.
+Example 3:
+
+Input: nums = [11,13,15,17]
+Output: 11
+Explanation: The original array was [11,13,15,17] and it was rotated 4 times. 
+
+class Solution {
+    public int findMin(int[] nums) {
+        int low=0; int high=nums.length-1;
+        while(low<high){
+            int mid= (low+high)/2;
+            if(nums[mid]>nums[high]){
+                low=mid+1;
+            }else{
+                high=mid;
+			}	
+        }
+        return nums[low];
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 14. Longest Common Prefix
+
+Example 1:
+
+Input: strs = ["flower","flow","flight"]
+Output: "fl"
+Example 2:
+
+Input: strs = ["dog","racecar","car"]
+Output: ""
+Explanation: There is no common prefix among the input strings.
+ 
+ 
+class Solution {
+    public String longestCommonPrefix(String[] strs) {
+         if(strs == null || strs.length == 0) return "";
+        //here first array value storing in prefix
+        String prefix = strs[0];
+        for(int i = 1; i < strs.length; i++) {
+            while(strs[i].indexOf(prefix) != 0) {
+            	//here every time removing one character and comparing in while loop
+                prefix = prefix.substring(0, prefix.length() - 1);
+                if(prefix.isEmpty()) return "";
+            }
+        }
+        return prefix;
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 35. Search Insert Position
+
+Example 1:
+
+Input: nums = [1,3,5,6], target = 5
+Output: 2
+Example 2:
+
+Input: nums = [1,3,5,6], target = 2
+Output: 1
+Example 3:
+
+Input: nums = [1,3,5,6], target = 7
+Output: 4
+
+class Solution {
+    public int searchInsert(int[] nums, int target) {
+      int low= 0;
+      int high= nums.length-1;
+      int ans = nums.length;
+      while(low<=high){
+        int mid= (low+high)/2;
+        if(nums[mid]==target){
+            return mid;
+        }else if(nums[mid] > target){
+            high =mid-1;
+            ans= mid;
+        }else{
+            low= mid+1;
+        }
+      }
+      return ans;
+    }
+}
