@@ -977,3 +977,164 @@ class Solution {
       return ans;
     }
 }
+--------------------------------------------------------------------------
+LeetCode 34. Find First and Last Position of Element in Sorted Array
+
+Example 1:
+
+Input: nums = [5,7,7,8,8,10], target = 8
+Output: [3,4]
+Example 2:
+
+Input: nums = [5,7,7,8,8,10], target = 6
+Output: [-1,-1]
+Example 3:
+
+Input: nums = [], target = 0
+Output: [-1,-1]
+
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
+        int low=0;
+        int high=nums.length-1;
+        int firtPosition=-1;
+        int lastPosition=-1;
+        while(low<=high){
+            int mid =(low+high)/2;
+
+            if(nums[mid] == target){
+                firtPosition = mid;
+                high= mid-1;
+            }else if( target >nums[mid] ){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        low=0;
+        high=nums.length-1;
+        while(low<=high){
+            int mid =(low+high)/2;
+            if(nums[mid] ==target){
+                lastPosition=mid;
+                low=mid+1;
+            }else if(nums[mid]< target){
+                low=mid+1;
+            }else{
+                high= mid-1;
+            }
+        }
+
+        return new int[]{firtPosition, lastPosition};
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 69. Sqrt(x)
+
+Example 1:
+
+Input: x = 4
+Output: 2
+Explanation: The square root of 4 is 2, so we return 2.
+Example 2:
+
+Input: x = 8
+Output: 2
+Explanation: The square root of 8 is 2.82842..., and since we round it down to the nearest integer, 2 is returned.
+
+class Solution {
+    public int mySqrt(int x) {
+        if( x==0 || x ==1){
+            return x;
+        }
+        int result=1;
+        int low=0; int high =x;
+        while(low<= high){
+            int mid = (low + high )/2;
+            if(mid <=  (x/mid)){
+                result = mid;
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }
+        return result;
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 367. Valid Perfect Square
+
+Example 1:
+
+Input: num = 16
+Output: true
+Explanation: We return true because 4 * 4 = 16 and 4 is an integer.
+Example 2:
+
+Input: num = 14
+Output: false
+Explanation: We return false because 3.742 * 3.742 = 14 and 3.742 is not an integer.
+
+class Solution {
+    public boolean isPerfectSquare(int num) {
+        int low=1, high=num;
+        int ans=0;
+         if(num==0){
+                return true;
+            }
+        while(low<=high){
+            int mid=(low+high)/2;
+            if(mid<=(num/mid)){
+                ans=mid;
+                low=mid+1;
+            }else {
+                high=mid-1;
+            }
+            if(ans*ans ==num){
+				return true;
+            }
+        }
+        return false;
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 162. Find Peak Element
+
+Example 1:
+
+Input: nums = [1,2,3,1]
+Output: 2
+Explanation: 3 is a peak element and your function should return the index number 2.
+Example 2:
+
+Input: nums = [1,2,1,3,5,6,4]
+Output: 5
+Explanation: Your function can return either index number 1 where the peak element is 2, or index number 5 where the peak element is 6.
+
+class Solution {
+    public int findPeakElement(int[] nums) {
+        if(nums!=null && nums.length==1){
+            return 0;
+        }
+        int n=nums.length;
+        if(nums[0]>nums[1]){
+            return 0;
+        }
+        if(nums[n-1]> nums[n-2]){
+            return n-1;
+        }
+        int  low=1; int high =n-2;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(nums[mid] > nums[mid+1] && nums[mid]> nums[mid-1]){
+                return mid;
+            }
+            if(nums[mid]> nums[mid-1]){
+                low = mid+1;
+            }else {
+                high= mid-1;
+            }
+        }
+    return -1;
+    }
+}
