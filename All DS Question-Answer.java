@@ -56,7 +56,7 @@ class Solution {
     }
 }
 --------------------------------------------------------------------------
-4. Median of Two Sorted Arrays
+LeetCode 4. Median of Two Sorted Arrays
 
 Example 1:
 
@@ -122,14 +122,14 @@ class Solution {
                 high=mid-1;
             }
             if(ans*ans ==num){
-            return true;
-             }
+				return true;
+            }
         }
         return false;
     }
 }
 --------------------------------------------------------------------------
-283. Move Zeroes
+LeetCode 283. Move Zeroes
 
 Example 1:
 
@@ -176,7 +176,7 @@ class Solution {
     }
 }
 --------------------------------------------------------------------------
-11. Container With Most Water
+Leetcode 11. Container With Most Water
 Input: height = [1,8,6,2,5,4,8,3,7]
 Output: 49
 Explanation: The above vertical lines are represented by array [1,8,6,2,5,4,8,3,7]. In this case, the max area of water (blue section) the container can contain is 49.
@@ -1239,5 +1239,134 @@ class Solution {
             }
         }
         return k+1;
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 20. Valid Parentheses
+Example 1:
+
+Input: s = "()"
+
+Output: true
+
+Example 2:
+
+Input: s = "()[]{}"
+
+Output: true
+
+Example 3:
+
+Input: s = "(]"
+
+Output: false
+
+class Solution {
+    public boolean isValid(String str) {
+        Stack<Character> stack=new Stack<Character>();
+
+        for(char ch: str.toCharArray()){
+            if(ch=='(' || ch =='{' || ch== '['){
+                stack.push(ch);
+            }else{
+                if(stack.isEmpty()){
+                    return false;
+                }
+                char open= stack.pop();
+                if(!isMatch(open, ch)){
+                    return false;
+                }
+            }
+        }
+         // Stack should be empty if valid parentheses
+        return stack.isEmpty();
+    }
+
+    private boolean isMatch(char open, char close){
+        return (open=='(' && close==')') || (open == '{' && close == '}')
+                || (open == '[' && close == ']');
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 13. Roman to Integer
+Example 1:
+
+Input: s = "III"
+Output: 3
+Explanation: III = 3.
+Example 2:
+
+Input: s = "LVIII"
+Output: 58
+Explanation: L = 50, V= 5, III = 3.
+
+class Solution {
+    public int romanToInt(String str) {
+        Map<Character, Integer> map=new HashMap<Character, Integer>();
+        map.put('I', 1);         map.put('V', 5);
+        map.put('X', 10);        map.put('L', 50);
+        map.put('C', 100);       map.put('D', 500);
+        map.put('M', 1000);
+        
+        int result=0;
+        int prevValue=0;
+
+        for(int i= str.length()-1;  i>=0; i--){
+            int currectValue= map.get(str.charAt(i));
+            if(currectValue < prevValue){
+                result= result- currectValue;
+            }else{
+                result = result+ currectValue;
+            }
+            prevValue=currectValue;
+        }
+        return result;
+    }
+}
+--------------------------------------------------------------------------
+Leetcode 28. Find the Index of the First Occurrence in a String
+Example 1:
+
+Input: haystack = "sadbutsad", needle = "sad"
+Output: 0
+Explanation: "sad" occurs at index 0 and 6.
+The first occurrence is at index 0, so we return 0.
+Example 2:
+
+Input: haystack = "leetcode", needle = "leeto"
+Output: -1
+Explanation: "leeto" did not occur in "leetcode", so we return -1.
+
+class Solution {
+    public int strStr(String haystack, String needle) {
+        int m= haystack.length();
+        int n= needle.length();
+
+        for(int i =0; i<=m-n; i++){
+            if(haystack.substring(i, i+n).equals(needle)){
+                return i;
+            }
+        }
+        return -1;
+    }
+}
+--------------------------------------------------------------------------
+LeetCode 58. Length of Last Word
+Example 1:
+
+Input: s = "Hello World"
+Output: 5
+Explanation: The last word is "World" with length 5.
+Example 2:
+
+Input: s = "   fly me   to   the moon  "
+Output: 4
+Explanation: The last word is "moon" with length 4.
+
+class Solution {
+    public int lengthOfLastWord(String s) {
+        String arr[]= s.split(" ");
+        String result =arr[arr.length-1];
+        return result.length();
     }
 }
