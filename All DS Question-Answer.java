@@ -1370,3 +1370,116 @@ class Solution {
         return result.length();
     }
 }
+
+
+==========================================================================
+			LinkedList 
+==========================================================================
+
+Print Linked List
+Input: LinkedList : 1 -> 2
+Output: 1 2
+Explanation: The linked list contains two elements 1 and 2.The elements are printed in a single line.
+
+/* Node is defined as
+class Node {
+    int data;
+    Node next;
+    Node(int x) {
+        data = x;
+        next = null;
+    }
+}*/
+/*
+    Print elements of a linked list on console
+    Head pointer input could be NULL as well for empty list
+*/
+
+class Solution {
+    // Function to display the elements of a linked list in same line
+    void printList(Node head) {
+        Node current = head;
+        
+        while(current != null){
+            System.out.print(current.data+" ");
+            current= current.next;
+        }
+    }
+}
+--------------------------------------------------------------------------
+Count Linked List Nodes
+Input: LinkedList : 1->2->3->4->5
+Output: 5
+Explanation: Count of nodes in the linked list is 5, which is its length.
+
+class Node{
+    int data;
+    Node next;
+    Node(int a){  data = a; next = null; }
+}*/
+
+class Solution {
+    // Function to count nodes of a linked list.
+    public int getCount(Node head) {
+        int count=0;
+        
+        Node current=head;
+        
+        while(current!=null){
+            count++;
+            current= current.next;
+        }
+        return count;
+    }
+}		
+--------------------------------------------------------------------------
+https://www.geeksforgeeks.org/problems/linked-list-length-even-or-odd/0
+
+Is Linked List Length Even?
+
+Input: Linked list: 12->52->10->47->95->0
+Output: true
+Explanation: The length of the linked list is 6 which is even, hence returned true.
+
+Input: Linked list: 9->4->3
+Output: false
+Explanation: The length of the linked list is 3 which is odd, hence returned false.
+
+class Solution {
+    public boolean isLengthEven(Node head) {
+         
+         Node current= head;
+         int count = 0;
+         while(current != null){
+             count++;
+             current=current.next;
+         }
+         
+         return count%2==0? true: false;
+    }
+}
+--------------------------------------------------------------------------
+https://www.geeksforgeeks.org/problems/linked-list-insertion-1587115620/1?itm_source=geeksforgeeks&itm_medium=article&itm_campaign=practice_card
+
+
+class Solution {
+    // Function to insert a node at the end of the linked list.
+    Node insertAtEnd(Node head, int x) {
+      
+      Node temp=new Node(x);
+      if(head==null){
+          return temp;
+      }
+       
+       Node current= head;
+       
+       while(current.next != null){
+           current = current.next;
+       }
+       
+       current.next=temp;
+       
+       return head;
+        
+    }
+}
